@@ -24,4 +24,9 @@ yarn-error.log*
 
 db.json
 
+Notes/*
 Notes/readme
+
+.idea/*
+*.iml
+secret.txt

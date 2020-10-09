@@ -1,4 +1,4 @@
-import { GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG } from '../actions/types';
+import { GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG, DELETE_LOG } from '../actions/types';
 
 const initialState = {
     logs: null,
@@ -27,6 +27,12 @@ export default (state = initialState, action) => {
                 // we set it to an array and use the spread operator to spread across state.logs and add onto it
                 // our action.payload - which is the new log that comes from the server
                 logs: [...state.logs, action.payload],
+                loading: false
+            }
+        case DELETE_LOG:
+            return {
+                ...state,
+                logs: state.logs.filter(log => log.id !== action.payload),
                 loading: false
             }
         case LOGS_ERROR:

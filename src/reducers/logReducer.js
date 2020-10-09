@@ -1,4 +1,4 @@
-import { GET_LOGS, SET_LOADING, LOGS_ERROR } from '../actions/types';
+import { GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG } from '../actions/types';
 
 const initialState = {
     logs: null,
@@ -20,6 +20,15 @@ export default (state = initialState, action) => {
                 ...state,
                 loading: true
             };
+        case ADD_LOG:
+            return {
+                ...state,
+                // We're taking the logs array, because state is immutable - so we can't just push onto it,
+                // we set it to an array and use the spread operator to spread across state.logs and add onto it
+                // our action.payload - which is the new log that comes from the server
+                logs: [...state.logs, action.payload],
+                loading: false
+            }
         case LOGS_ERROR:
             console.error(action.payload)
             return {

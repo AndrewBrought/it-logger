@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
-import { connect } from 'react-redux';
+import TechSelectOptions from '../techs/TechSelectOptions';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { addLog } from "../../actions/logActions";
+import {addLog} from "../../actions/logActions";
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-const AddLogModal = ({ addLog }) => {
+const AddLogModal = ({addLog}) => {
     const [message, setMessage] = useState('');
     const [attention, setAttention] = useState(false);
     const [tech, setTech] = useState('');
 
     const onSubmit = () => {
-        if(message === '' || tech === '') {
-            M.toast({ html: 'Please enter a message and tech' });
+        if (message === '' || tech === '') {
+            M.toast({html: 'Please enter a message and tech'});
         } else {
             const newLog = {
                 message,
@@ -23,7 +24,7 @@ const AddLogModal = ({ addLog }) => {
             // This is our redux action
             addLog(newLog);
 
-            M.toast({ html: `Log added by ${tech}` });
+            M.toast({html: `Log added by ${tech}`});
 
             //    clear Fields
             setMessage('');
@@ -56,16 +57,16 @@ const AddLogModal = ({ addLog }) => {
                             name='tech'
                             value={tech}
                             className='browser-default'
-                            onChange={e => setTech(e.target.value)}>
+                            onChange={e => setTech(e.target.value)}
+                        >
                             <option value='' disabled>
                                 Select Technician
                             </option>
-                            <option value='John Doe'>John Doe</option>
-                            <option value='Sam smith'>Sam smith</option>
-                            <option value='Sara Wilson'>Sara Wilson</option>
+                            <TechSelectOptions/>
                         </select>
                     </div>
                 </div>
+
                 <div className='row'>
                     <div className='input-field'>
                         <p>
@@ -101,4 +102,4 @@ const modalStyle = {
     height: '75%'
 };
 
-export default connect(null, { addLog })(AddLogModal);
+export default connect(null, {addLog})(AddLogModal);
